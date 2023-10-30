@@ -115,5 +115,5 @@ app.get("/notification", (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Example app listening on port http://${host}:${port}`);
+  console.log(`Example app listening on port http://${port}`);
 });
