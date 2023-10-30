@@ -3,7 +3,7 @@ const cors = require("cors");
 const ws = require("ws");
 const app = express();
 const port = 3100;
-const host = "192.168.0.22";
+//const host = "192.168.0.22";
 
 const clients = []; // Mantén un arreglo de clientes suscritos a EventSource
 let notifications = [];
@@ -114,6 +114,6 @@ app.get("/notification", (req, res) => {
   res.write(`data: ${JSON.stringify(notifications)}\n\n`);
 });
 
-app.listen(port, host, () => {
+app.listen(port, () => {
   console.log(`Example app listening on port http://${host}:${port}`);
 });
