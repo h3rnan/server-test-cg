@@ -62,6 +62,18 @@ app.post("/order", (req, res) => {
           orderNumber: orderNumber,
           transactionNumber: transactionNumber,
         });
+        notifications.push({
+          id: notifications.length + 1,
+          title: `mensaje nuevo ${notifications.length + 1}`,
+          description: "si nuevo e dicho",
+          orderNumber: orderNumber,
+          transactionNumber: transactionNumber,
+          methodPayment: req.body?.methodPayment,
+          deliveryType: req.body?.deliveryType,
+          date: new Date(),
+          status: "unread",
+          type: "order",
+        });
         res.status(201).send({
           id: id,
           orderNumber: orderNumber,
@@ -81,6 +93,10 @@ app.post("/order", (req, res) => {
       id: notifications.length + 1,
       title: `mensaje nuevo ${notifications.length + 1}`,
       description: "si nuevo e dicho",
+      orderNumber: orderNumber,
+      transactionNumber: transactionNumber,
+      methodPayment: req.body?.methodPayment,
+      deliveryType: req.body?.deliveryType,
       date: new Date(),
       status: "unread",
       type: "order",
@@ -111,9 +127,27 @@ app.get("/notification", (req, res) => {
     clients.splice(clients.indexOf(res), 1);
   });
 
-  res.write(`data: ${JSON.stringify(notifications)}\n\n`);
+  const notificationNotRead = notifications.filter(
+    (notification) => notification.status === "unread"
+  );
+  res.write(`data: ${JSON.stringify(notificationNotRead)}\n\n`);
+});
+
+app.put("/notification/:id", (req, res) => {
+  try {
+    const id = req.params?.id;
+    const notificationFind = notifications.find(
+      (notification) => notification.id == id
+    );
+    if (notificationFind) {
+      notificationFind.status = "read";
+      res.status(200).send(notificationFind);
+    } else {
+      res.status(404).send("Not found");
+    }
+  } catch (err) {}
 });
 
 app.listen(PORT, () => {
-  console.log(`Example app listening on port http://${PORT}`);
+  console.log(`Example app listening on port http:${HOST}//${PORT}`);
 });
