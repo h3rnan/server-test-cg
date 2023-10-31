@@ -49,13 +49,13 @@ app.get("/order/:id", (req, res) => {
 });
 
 app.post("/order", (req, res) => {
+  const orderNumber = generateRandomNumber();
+  const transactionNumber = generateRandomNumber();
+  const id = orders.length + 1;
   try {
     console.log("order-request ==>", { data: req.data, body: req.body });
     setTimeout(() => {
       if (halfOfTimesIsTrue()) {
-        const orderNumber = generateRandomNumber();
-        const transactionNumber = generateRandomNumber();
-        const id = orders.length + 1;
         orders.push({
           ...req.body,
           id: id,
