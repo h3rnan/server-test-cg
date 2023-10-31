@@ -72,7 +72,7 @@ app.post("/order", (req, res) => {
           deliveryType: req.body?.deliveryType,
           date: new Date(),
           status: "unread",
-          type: "order",
+          type: "order-new",
         });
         res.status(201).send({
           id: id,
@@ -82,6 +82,18 @@ app.post("/order", (req, res) => {
           deliveryType: req.body?.deliveryType,
         });
       } else {
+        notifications.push({
+          id: notifications.length + 1,
+          title: `mensaje nuevo ${notifications.length + 1}`,
+          description: "si nuevo e dicho",
+          orderNumber: orderNumber,
+          transactionNumber: transactionNumber,
+          methodPayment: req.body?.methodPayment,
+          deliveryType: req.body?.deliveryType,
+          date: new Date(),
+          status: "unread",
+          type: "order-failed",
+        });
         res.status(400).send({
           message: "No fue posible crear la orden por problemas en al data.",
         });
@@ -99,7 +111,7 @@ app.post("/order", (req, res) => {
       deliveryType: req.body?.deliveryType,
       date: new Date(),
       status: "unread",
-      type: "order",
+      type: "order-failed",
     });
     sendNotificationToClients(`${JSON.stringify(notifications)}\n\n`); // Debes implementar esta función1
 
@@ -136,16 +148,23 @@ app.get("/notification", (req, res) => {
 app.put("/notification/:id", (req, res) => {
   try {
     const id = req.params?.id;
-    const notificationFind = notifications.find(
-      (notification) => notification.id == id
-    );
+    const notificationFind = notifications.find((notification) => {
+      if (notification.orderNumber == id) {
+        notification.status = "read";
+        return true;
+      } else {
+        return false;
+      }
+    });
     if (notificationFind) {
       notificationFind.status = "read";
       res.status(200).send(notificationFind);
     } else {
       res.status(404).send("Not found");
     }
-  } catch (err) {}
+  } catch (err) {
+    console.log("notification-request ==>", err);
+  }
 });
 
 app.listen(PORT, () => {
