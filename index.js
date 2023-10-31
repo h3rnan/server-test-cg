@@ -96,6 +96,11 @@ app.post("/order", (req, res) => {
         });
         res.status(400).send({
           message: "No fue posible crear la orden por problemas en al data.",
+          id: id,
+          orderNumber: orderNumber,
+          transactionNumber: transactionNumber,
+          methodPayment: req.body?.methodPayment,
+          deliveryType: req.body?.deliveryType,
         });
       }
     }, 10000);
@@ -115,7 +120,13 @@ app.post("/order", (req, res) => {
     });
     sendNotificationToClients(`${JSON.stringify(notifications)}\n\n`); // Debes implementar esta función1
 
-    res.status(500).send("Something went wrong");
+    res.status(500).send({
+      id: id,
+      orderNumber: orderNumber,
+      transactionNumber: transactionNumber,
+      methodPayment: req.body?.methodPayment,
+      deliveryType: req.body?.deliveryType,
+    });
   }
 });
 
