@@ -156,6 +156,13 @@ app.get("/notification", (req, res) => {
   res.write(`data: ${JSON.stringify(notificationNotRead)}\n\n`);
 });
 
+app.get("/notification-list", (req, res) => {
+  const notificationNotRead = notifications.filter(
+    (notification) => notification.status === "unread"
+  );
+  res.status(200).send(notificationNotRead[notificationNotRead.length - 1]);
+});
+
 app.put("/notification/:id", (req, res) => {
   try {
     const id = req.params?.id;
