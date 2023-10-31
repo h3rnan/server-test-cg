@@ -162,7 +162,7 @@ app.get("/notification-list", (req, res) => {
       (notification) => notification.status === "unread"
     );
     if (notificationNotRead && notificationNotRead.length > 0) {
-      res.status(200).send(notificationNotRead[notificationNotRead.length - 1]);
+      res.status(200).send(notificationNotRead);
     } else {
       res.status(200).send([]);
     }
