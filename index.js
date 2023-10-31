@@ -157,10 +157,19 @@ app.get("/notification", (req, res) => {
 });
 
 app.get("/notification-list", (req, res) => {
-  const notificationNotRead = notifications.filter(
-    (notification) => notification.status === "unread"
-  );
-  res.status(200).send(notificationNotRead[notificationNotRead.length - 1]);
+  try {
+    const notificationNotRead = notifications.filter(
+      (notification) => notification.status === "unread"
+    );
+    if (notificationNotRead && notificationNotRead.length > 0) {
+      res.status(200).send(notificationNotRead[notificationNotRead.length - 1]);
+    } else {
+      res.status(200).send([]);
+    }
+  } catch (err) {
+    console.log("notification-list-request ==>", err);
+    res.status(500).send({ message: err.message });
+  }
 });
 
 app.put("/notification/:id", (req, res) => {
