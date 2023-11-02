@@ -49,6 +49,13 @@ app.get("/order/:id", (req, res) => {
 });
 
 app.post("/order", (req, res) => {
+  res.set({
+    Connection: "keep-alive",
+    // enabling CORS
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Headers":
+      "Origin, X-Requested-With, Content-Type, Accept",
+  });
   const orderNumber = generateRandomNumber();
   const transactionNumber = generateRandomNumber();
   const id = orders.length + 1;
