@@ -110,7 +110,7 @@ app.post("/order", (req, res) => {
           deliveryType: req.body?.deliveryType,
         });
       }
-    }, 30000);
+    }, 5000);
   } catch (error) {
     console.log("order-request ==>", error);
     notifications.push({
