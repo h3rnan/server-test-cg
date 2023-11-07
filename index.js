@@ -9,6 +9,58 @@ const clients = []; // Mantén un arreglo de clientes suscritos a EventSource
 let notifications = [];
 let orders = [];
 
+let orderList = [
+  {
+    id: 1,
+    orderNumber: 123456789,
+    sapDistributor: 123456789,
+    atCreatedDate: "19/04/2023",
+    atCreatedTime: "19:00",
+    distributorName: "San Juanito",
+    deliveryMethod: "Despacho",
+    deliveryDate: "Mañana (17/07/2024)",
+    deliveryTime: "Tarde - 15:00 a 18:00hrs.",
+    deliveryWarehouse: "Av. El Salto 7654, Recoleta",
+    documentType: "Factura",
+    paymentMethod: "Efectivo",
+    orderStatus: "Pendiente",
+    paymentStatus: "Pendiente",
+    balance: 100000,
+    payment: 100000,
+    subtotal: 100000,
+    total: 100000,
+    products: [
+      {
+        id: 0,
+        name: "Cilindro 5kg",
+        amount: 10,
+        totalWeight: 50,
+        vouchers: 2,
+        failed: 1,
+        totalValue: 10000,
+      },
+      {
+        id: 2,
+        name: "Cilindro 15kg",
+        amount: 10,
+        totalWeight: 150,
+        vouchers: 2,
+        failed: 1,
+        totalValue: 30000,
+      },
+      {
+        id: 3,
+        name: "Cilindro 45kg",
+        amount: 10,
+        totalWeight: 450,
+        vouchers: 2,
+        failed: 1,
+        totalValue: 70000,
+      },
+    ],
+  },
+];
+
 // Esta función se utiliza para enviar notificaciones a todos los clientes suscritos
 function sendNotificationToClients(data) {
   clients.forEach((client) => {
@@ -198,6 +250,20 @@ app.put("/notification/:id", (req, res) => {
     }
   } catch (err) {
     console.log("notification-request ==>", err);
+  }
+});
+
+app.get("/order-list/:id", (req, res) => {
+  try {
+    const id = req.params?.id;
+    const orderFind = orderList.filter((order) => order.id == id);
+    if (orderFind) {
+      res.status(200).send(orderFind);
+    }
+    res.status(200).send([]);
+  } catch (err) {
+    console.log("order-list-request ==>", err);
+    res.status(500).send({ message: err.message });
   }
 });
 
