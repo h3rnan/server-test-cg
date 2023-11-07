@@ -260,8 +260,9 @@ app.get("/order-list/:id", (req, res) => {
     console.log("order-list-request ==>", { id, orderFind });
     if (orderFind) {
       res.status(200).send(orderFind);
+    } else {
+      res.status(404).send({ message: "No hay ordenes" });
     }
-    res.status(404).send({ message: "No hay ordenes" });
   } catch (err) {
     console.log("order-list-request ==>", err);
     res.status(500).send({ message: err.message });
