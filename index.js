@@ -257,6 +257,7 @@ app.get("/order-list/:id", (req, res) => {
   try {
     const id = req.params?.id;
     const orderFind = orderList.find((order) => order.id == id);
+    console.log("order-list-request ==>", { id, orderFind });
     if (orderFind) {
       res.status(200).send(orderFind);
     }
