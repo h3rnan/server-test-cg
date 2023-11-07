@@ -256,11 +256,11 @@ app.put("/notification/:id", (req, res) => {
 app.get("/order-list/:id", (req, res) => {
   try {
     const id = req.params?.id;
-    const orderFind = orderList.filter((order) => order.id == id);
+    const orderFind = orderList.find((order) => order.id == id);
     if (orderFind) {
       res.status(200).send(orderFind);
     }
-    res.status(200).send([]);
+    res.status(404).send({ message: "No hay ordenes" });
   } catch (err) {
     console.log("order-list-request ==>", err);
     res.status(500).send({ message: err.message });
