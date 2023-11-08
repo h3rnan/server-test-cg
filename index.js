@@ -274,7 +274,7 @@ app.get("/order-list", (req, res) => {
     console.log("order-list-request ==>", {
       data: req.data,
       body: req.body,
-      req,
+      query: req.query,
     });
     res.status(200).send([
       {
