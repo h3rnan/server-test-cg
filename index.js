@@ -409,7 +409,7 @@ app.get("/order-list", (req, res) => {
     if (req.query?.end_date) {
       const dateslit = req.query?.end_date.split("-");
       const date = new Date(dateslit[2], dateslit[1] - 1, dateslit[0]);
-      console.log("date => ", { date, limint: new Date(2023, 10, 31) });
+      console.log("date => ", { date, limint: new Date(2023, 9, 31) });
       if (date <= new Date(2023, 10, 31)) {
         res.status(200).send([]);
       } else {
