@@ -276,136 +276,145 @@ app.get("/order-list", (req, res) => {
       body: req.body,
       query: req.query,
     });
-    res.status(200).send([
-      {
-        id: 1,
-        nOrder: "102122341",
-        payStatus: "Pendiente de liberación",
-        orderStatus: "Pendiente de despacho",
-        dateOfEnrrollment: "12/11/2023",
-      },
-      {
-        id: 2,
-        nOrder: "102122342",
-        payStatus: "Pendiente de pago",
-        orderStatus: "Facturado",
-        dateOfEnrrollment: "12/11/2023",
-      },
-      {
-        id: 3,
-        nOrder: "102122343",
-        payStatus: "Liberado",
-        orderStatus: "En Ruta",
-        dateOfEnrrollment: "12/11/2023",
-      },
-      {
-        id: 4,
-        nOrder: "102122344",
-        payStatus: "Pagado",
-        orderStatus: "Completado",
-        dateOfEnrrollment: "12/11/2023",
-      },
-      {
-        id: 5,
-        nOrder: "102122345",
-        payStatus: "Pendiente de liberación",
-        orderStatus: "Pendiente de despacho",
-        dateOfEnrrollment: "12/11/2023",
-      },
-      {
-        id: 6,
-        nOrder: "102122346",
-        payStatus: "Pendiente de pago",
-        orderStatus: "Facturado",
-        dateOfEnrrollment: "11/11/2023",
-      },
-      {
-        id: 7,
-        nOrder: "102122347",
-        payStatus: "Liberado",
-        orderStatus: "En Ruta",
-        dateOfEnrrollment: "11/11/2023",
-      },
-      {
-        id: 8,
-        nOrder: "102122348",
-        payStatus: "Pagado",
-        orderStatus: "Completado",
-        dateOfEnrrollment: "11/11/2023",
-      },
+    if (req.query?.end_date > new Date()) {
+      const dateslit = req.query?.end_date.split("-");
+      const date = new Date(dateslit[1], dateslit[0], dateslit[2]);
+      console.log("date => ", { date, limint: new Date(2023, 10, 31) });
+      if (date <= new Date(2023, 10, 31)) {
+        res.status(200).send([]);
+      }
+    } else {
+      res.status(200).send([
+        {
+          id: 1,
+          nOrder: "102122341",
+          payStatus: "Pendiente de liberación",
+          orderStatus: "Pendiente de despacho",
+          dateOfEnrrollment: "12/11/2023",
+        },
+        {
+          id: 2,
+          nOrder: "102122342",
+          payStatus: "Pendiente de pago",
+          orderStatus: "Facturado",
+          dateOfEnrrollment: "12/11/2023",
+        },
+        {
+          id: 3,
+          nOrder: "102122343",
+          payStatus: "Liberado",
+          orderStatus: "En Ruta",
+          dateOfEnrrollment: "12/11/2023",
+        },
+        {
+          id: 4,
+          nOrder: "102122344",
+          payStatus: "Pagado",
+          orderStatus: "Completado",
+          dateOfEnrrollment: "12/11/2023",
+        },
+        {
+          id: 5,
+          nOrder: "102122345",
+          payStatus: "Pendiente de liberación",
+          orderStatus: "Pendiente de despacho",
+          dateOfEnrrollment: "12/11/2023",
+        },
+        {
+          id: 6,
+          nOrder: "102122346",
+          payStatus: "Pendiente de pago",
+          orderStatus: "Facturado",
+          dateOfEnrrollment: "11/11/2023",
+        },
+        {
+          id: 7,
+          nOrder: "102122347",
+          payStatus: "Liberado",
+          orderStatus: "En Ruta",
+          dateOfEnrrollment: "11/11/2023",
+        },
+        {
+          id: 8,
+          nOrder: "102122348",
+          payStatus: "Pagado",
+          orderStatus: "Completado",
+          dateOfEnrrollment: "11/11/2023",
+        },
 
-      {
-        id: 9,
-        nOrder: "102122349",
-        payStatus: "Pendiente de liberación",
-        orderStatus: "Pendiente de despacho",
-        dateOfEnrrollment: "11/11/2023",
-      },
-      {
-        id: 10,
-        nOrder: "102122350",
-        payStatus: "Pendiente de pago",
-        orderStatus: "Facturado",
-        dateOfEnrrollment: "10/11/2023",
-      },
-      {
-        id: 11,
-        nOrder: "102122351",
-        payStatus: "Liberado",
-        orderStatus: "En Ruta",
-        dateOfEnrrollment: "10/11/2023",
-      },
-      {
-        id: 12,
-        nOrder: "102122352",
-        payStatus: "Pagado",
-        orderStatus: "Completado",
-        dateOfEnrrollment: "10/11/2023",
-      },
+        {
+          id: 9,
+          nOrder: "102122349",
+          payStatus: "Pendiente de liberación",
+          orderStatus: "Pendiente de despacho",
+          dateOfEnrrollment: "11/11/2023",
+        },
+        {
+          id: 10,
+          nOrder: "102122350",
+          payStatus: "Pendiente de pago",
+          orderStatus: "Facturado",
+          dateOfEnrrollment: "10/11/2023",
+        },
+        {
+          id: 11,
+          nOrder: "102122351",
+          payStatus: "Liberado",
+          orderStatus: "En Ruta",
+          dateOfEnrrollment: "10/11/2023",
+        },
+        {
+          id: 12,
+          nOrder: "102122352",
+          payStatus: "Pagado",
+          orderStatus: "Completado",
+          dateOfEnrrollment: "10/11/2023",
+        },
 
-      {
-        id: 13,
-        nOrder: "102122353",
-        payStatus: "Pendiente de liberación",
-        orderStatus: "Pendiente de despacho",
-        dateOfEnrrollment: "10/11/2023",
-      },
-      {
-        id: 14,
-        nOrder: "102122354",
-        payStatus: "Pendiente de pago",
-        orderStatus: "Facturado",
-        dateOfEnrrollment: "10/11/2023",
-      },
-      {
-        id: 15,
-        nOrder: "102122355",
-        payStatus: "Liberado",
-        orderStatus: "En Ruta",
-        dateOfEnrrollment: "10/11/2023",
-      },
-      {
-        id: 16,
-        nOrder: "102122356",
-        payStatus: "Pagado",
-        orderStatus: "Completado",
-        dateOfEnrrollment: "10/11/2023",
-      },
-      {
-        id: 17,
-        nOrder: "102122357",
-        payStatus: "Pendiente de liberación",
-        orderStatus: "Pendiente de despacho",
-        dateOfEnrrollment: "10/11/2023",
-      },
-      {
-        id: 18,
-        nOrder: "102122358",
-        payStatus: "Pendiente de pago",
-        orderStatus: "Facturado",
-        dateOfEnrrollment: "10/11/2023",
-      },
-    ]);
+        {
+          id: 13,
+          nOrder: "102122353",
+          payStatus: "Pendiente de liberación",
+          orderStatus: "Pendiente de despacho",
+          dateOfEnrrollment: "10/11/2023",
+        },
+        {
+          id: 14,
+          nOrder: "102122354",
+          payStatus: "Pendiente de pago",
+          orderStatus: "Facturado",
+          dateOfEnrrollment: "10/11/2023",
+        },
+        {
+          id: 15,
+          nOrder: "102122355",
+          payStatus: "Liberado",
+          orderStatus: "En Ruta",
+          dateOfEnrrollment: "10/11/2023",
+        },
+        {
+          id: 16,
+          nOrder: "102122356",
+          payStatus: "Pagado",
+          orderStatus: "Completado",
+          dateOfEnrrollment: "10/11/2023",
+        },
+        {
+          id: 17,
+          nOrder: "102122357",
+          payStatus: "Pendiente de liberación",
+          orderStatus: "Pendiente de despacho",
+          dateOfEnrrollment: "10/11/2023",
+        },
+        {
+          id: 18,
+          nOrder: "102122358",
+          payStatus: "Pendiente de pago",
+          orderStatus: "Facturado",
+          dateOfEnrrollment: "10/11/2023",
+        },
+      ]);
+    }
   } catch (err) {
     console.log("order-list-request ==>", err);
     res.status(500).send({ message: err.message });
