@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const ws = require("ws");
 const app = express();
+const docs = require("./docs");
 const PORT = process.env.PORT || 3000;
 const HOST = process.env.HOST || "192.168.0.22";
 
@@ -413,18 +414,29 @@ app.get("/order-list", (req, res) => {
       if (date <= new Date(2023, 8, 30)) {
         res.status(200).send({ data: [] });
       } else {
-        res
-          .status(200)
-          .send({
-            data: orderListNew,
-            meta: { maxRowsByPage: 10, totalRows: orderListNew.length },
-          });
+        res.status(200).send({
+          data: orderListNew,
+          meta: { maxRowsByPage: 10, totalRows: orderListNew.length },
+        });
       }
     } else {
       res.status(200).send(orderListNew);
     }
   } catch (err) {
     console.log("order-list-request ==>", err);
+    res.status(500).send({ message: err.message });
+  }
+});
+
+app.get("/product", (req, res) => {
+  try {
+    let result = docs.products;
+    if (req.query?.is_pallet) {
+      result = result.filter((product) => product.isPallet);
+    }
+    res.status(200).send(result);
+  } catch (err) {
+    console.log("product-request ==>", err);
     res.status(500).send({ message: err.message });
   }
 });
