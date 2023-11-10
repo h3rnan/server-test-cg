@@ -457,10 +457,21 @@ app.get("/product-combination", (req, res) => {
   try {
     let result = docs.combinations?.map((combi) => combi.combinations);
     if (req.query?.combinations) {
-      const idProducts = req.query?.combinations.split(",");
-      result = docs?.combinations?.find((combi) =>
-        arraysTienenLosMismosElementos(idProducts, combi.idProducts)
-      )?.combinations;
+      const idProducts = req.query?.combinations
+        .split(",")
+        .map((id) => Number(id));
+      result =
+        docs?.combinations?.find((combi) =>
+          arraysTienenLosMismosElementos(idProducts, combi.idProducts)
+        )?.combinations || [];
+      console.log(
+        "result => ",
+        JSON.stringify({
+          result,
+          idProducts,
+          docs: docs.combinations,
+        })
+      );
     }
     res.status(200).send(result);
   } catch (err) {
