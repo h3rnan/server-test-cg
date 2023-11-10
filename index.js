@@ -455,12 +455,14 @@ app.get("/product", (req, res) => {
 
 app.get("/product-combination", (req, res) => {
   try {
-    let result = docs.combinations;
+    let result = docs.combinations?.map((combi) => combi.combinations);
     if (req.query?.combination) {
       const idProducts = req.query?.combination.split(",");
-      result = result.filter((combi) =>
-        arraysTienenLosMismosElementos(idProducts, combi.idProducts)
-      );
+      result = docs?.combinations
+        ?.filter((combi) =>
+          arraysTienenLosMismosElementos(idProducts, combi.idProducts)
+        )
+        ?.map((combi) => combi.combinations);
     }
     res.status(200).send(result);
   } catch (err) {
