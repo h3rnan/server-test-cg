@@ -459,7 +459,7 @@ app.get("/product-combination", (req, res) => {
     if (req.query?.combination) {
       const idProducts = req.query?.combination.split(",");
       result = docs?.combinations
-        ?.filter((combi) =>
+        ?.find((combi) =>
           arraysTienenLosMismosElementos(idProducts, combi.idProducts)
         )
         ?.map((combi) => combi.combinations);
