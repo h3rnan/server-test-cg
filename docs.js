@@ -55,6 +55,38 @@ const docs = {
       price: 38,
     },
   ],
+  combinations: [
+    {
+      id: 0,
+      idProducts: [0, 1],
+      combinations: [
+        [
+          {
+            id: 0,
+            weight: 5,
+            quantity: 10,
+          },
+          {
+            id: 1,
+            weight: 11,
+            quantity: 8,
+          },
+        ],
+        [
+          {
+            id: 0,
+            weight: 5,
+            quantity: 15,
+          },
+          {
+            id: 1,
+            weight: 11,
+            quantity: 10,
+          },
+        ],
+      ],
+    },
+  ],
 };
 
 module.exports = docs;

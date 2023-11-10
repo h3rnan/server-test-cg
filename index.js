@@ -192,6 +192,14 @@ let orderList = [
   },
 ];
 
+const arraysTienenLosMismosElementos = (arr1, arr2) => {
+  if (arr1.length !== arr2.length) {
+    return false; // Los arrays tienen diferentes longitudes, por lo que no pueden ser iguales.
+  }
+
+  return arr1.every((element) => arr2.includes(element));
+};
+
 // Esta función se utiliza para enviar notificaciones a todos los clientes suscritos
 function sendNotificationToClients(data) {
   clients.forEach((client) => {
@@ -431,8 +439,28 @@ app.get("/order-list", (req, res) => {
 app.get("/product", (req, res) => {
   try {
     let result = docs.products;
-    if (req.query?.is_pallet) {
+    if (req.query?.is_pallet === "true") {
       result = result.filter((product) => product.isPallet);
+    }
+    if (req.query?.combination) {
+      const idProducts = req.query?.combination.split(",");
+      result = result.filter((product) => idProducts.includes(product.id));
+    }
+    res.status(200).send(result);
+  } catch (err) {
+    console.log("product-request ==>", err);
+    res.status(500).send({ message: err.message });
+  }
+});
+
+app.get("/product-combination", (req, res) => {
+  try {
+    let result = docs.combinations;
+    if (req.query?.combination) {
+      const idProducts = req.query?.combination.split(",");
+      result = result.filter((combi) =>
+        arraysTienenLosMismosElementos(idProducts, combi.idProducts)
+      );
     }
     res.status(200).send(result);
   } catch (err) {
