@@ -458,11 +458,9 @@ app.get("/product-combination", (req, res) => {
     let result = docs.combinations?.map((combi) => combi.combinations);
     if (req.query?.combinations) {
       const idProducts = req.query?.combinations.split(",");
-      result = docs?.combinations
-        ?.find((combi) =>
-          arraysTienenLosMismosElementos(idProducts, combi.idProducts)
-        )
-        ?.map((combi) => combi.combinations);
+      result = docs?.combinations?.find((combi) =>
+        arraysTienenLosMismosElementos(idProducts, combi.idProducts)
+      )?.combinations;
     }
     res.status(200).send(result);
   } catch (err) {
