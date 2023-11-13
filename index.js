@@ -16,21 +16,21 @@ let orderListNew = [
     nOrder: "102122341",
     payStatus: "Pendiente de liberación",
     orderStatus: "Pendiente de despacho",
-    dateOfEnrrollment: "12/11/2023",
+    dateOfEnrrollment: "01/11/2023",
   },
   {
     id: 2,
     nOrder: "102122342",
     payStatus: "Pendiente de pago",
     orderStatus: "Facturado",
-    dateOfEnrrollment: "12/11/2023",
+    dateOfEnrrollment: "01/11/2023",
   },
   {
     id: 3,
     nOrder: "102122343",
     payStatus: "Liberado",
     orderStatus: "En Ruta",
-    dateOfEnrrollment: "12/11/2023",
+    dateOfEnrrollment: "01/11/2023",
   },
   {
     id: 4,
@@ -476,6 +476,14 @@ app.get("/product-combination", (req, res) => {
     res.status(200).send(result);
   } catch (err) {
     console.log("product-request ==>", err);
+    res.status(500).send({ message: err.message });
+  }
+});
+
+app.get("/positive-balance", (req, res) => {
+  try {
+    res.status(200).send(docs.positiveBalance);
+  } catch (err) {
     res.status(500).send({ message: err.message });
   }
 });

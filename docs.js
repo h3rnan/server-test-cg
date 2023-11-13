@@ -107,6 +107,32 @@ const docs = {
       ],
     },
   ],
+  positiveBalance: [
+    {
+      numDocument: 1000000000,
+      dateCreation: "28-08-2023",
+      value: 10000,
+      type: "rut",
+    },
+    {
+      numDocument: 1000000001,
+      dateCreation: "28-08-2023",
+      value: 10001,
+      type: "discount",
+    },
+    {
+      numDocument: 1000000002,
+      dateCreation: "28-08-2023",
+      value: 10001,
+      type: "oneClick",
+    },
+    {
+      numDocument: 1000000003,
+      dateCreation: "28-08-2023",
+      value: 10001,
+      type: "others",
+    },
+  ],
 };
 
 module.exports = docs;
