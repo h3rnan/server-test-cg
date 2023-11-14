@@ -3,6 +3,7 @@ const cors = require("cors");
 const ws = require("ws");
 const app = express();
 const docs = require("./docs");
+const dayjs = require("dayjs");
 const PORT = process.env.PORT || 3000;
 const HOST = process.env.HOST || "192.168.0.22";
 
@@ -417,16 +418,28 @@ app.get("/order-list", (req, res) => {
     });
     if (req.query?.end_date) {
       const dateslit = req.query?.end_date.split("-");
+      const dateslitStart = req.query?.start_date.split("-");
       const date = new Date(dateslit[2], dateslit[1] - 1, dateslit[0]);
+      const dateStart = new Date(
+        dateslitStart[2],
+        dateslitStart[1] - 1,
+        dateslitStart[0]
+      );
       console.log("date => ", { date, limint: new Date(2023, 8, 30) });
-      if (date <= new Date(2023, 8, 30)) {
-        res.status(200).send({ data: [] });
-      } else {
-        res.status(200).send({
-          data: orderListNew,
-          meta: { maxRowsByPage: 10, totalRows: orderListNew.length },
-        });
-      }
+      const orderFilter = orderListNew.filter((dateNew) => {
+        if (
+          dayjs(dateNew.date).isAfter(date) &&
+          dayjs(dateNew.date).isBefore(dateslitStart)
+        ) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+      res.status(200).send({
+        data: orderFilter,
+        meta: { maxRowsByPage: 10, totalRows: orderListNew.length },
+      });
     } else {
       res.status(200).send(orderListNew);
     }
@@ -482,6 +495,7 @@ app.get("/product-combination", (req, res) => {
 
 app.get("/positive-balance", (req, res) => {
   try {
+    console.log("positive-balance-request ==>", { docs: docs.positiveBalance });
     res.status(200).send(docs.positiveBalance);
   } catch (err) {
     res.status(500).send({ message: err.message });
