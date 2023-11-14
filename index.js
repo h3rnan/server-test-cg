@@ -425,10 +425,15 @@ app.get("/order-list", (req, res) => {
         dateslitStart[1] - 1,
         dateslitStart[0]
       );
-      console.log("date => ", { date, limint: new Date(2023, 8, 30) });
+      console.log("date => ", {
+        dateEnd: date,
+        dateStart: dateStart,
+        dateslitEnd: dateslit,
+        dateslitStart,
+      });
       const orderFilter = orderListNew.filter((dateNew) => {
         if (
-          dayjs(dateNew.date).isAfter(date) &&
+          dayjs(dateNew.date).isAfter(dateStart) &&
           dayjs(dateNew.date).isBefore(dateslitStart)
         ) {
           return true;
