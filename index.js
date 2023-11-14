@@ -4,6 +4,10 @@ const ws = require("ws");
 const app = express();
 const docs = require("./docs");
 const dayjs = require("dayjs");
+var isSameOrAfter = require("dayjs/plugin/isSameOrAfter");
+var isSameOrBefore = require("dayjs/plugin/isSameOrBefore");
+dayjs.extend(isSameOrAfter);
+dayjs.extend(isSameOrBefore);
 const PORT = process.env.PORT || 3000;
 const HOST = process.env.HOST || "192.168.0.22";
 
@@ -68,7 +72,6 @@ let orderListNew = [
     orderStatus: "Completado",
     dateOfEnrrollment: "11/11/2023",
   },
-
   {
     id: 9,
     nOrder: "102122349",
@@ -432,9 +435,20 @@ app.get("/order-list", (req, res) => {
         dateslitStart,
       });
       const orderFilter = orderListNew.filter((dateNew) => {
+        const dateSplitNew = dateNew.dateOfEnrrollment.split("/");
+        const dateFilter = new Date(
+          dateSplitNew[2],
+          dateSplitNew[1] - 1,
+          dateSplitNew[0]
+        );
+        console.log("dateFilter => ", {
+          dateFilter,
+          dateSplitNew,
+          dateOfEnrrollment: dateNew.dateOfEnrrollment,
+        });
         if (
-          dayjs(dateNew.date).isAfter(dateStart) &&
-          dayjs(dateNew.date).isBefore(dateslitStart)
+          dayjs(dateFilter).isSameOrAfter(dateStart) &&
+          dayjs(dateFilter).isSameOrBefore(date)
         ) {
           return true;
         } else {
