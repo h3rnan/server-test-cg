@@ -457,7 +457,7 @@ app.get("/order-list", (req, res) => {
       });
       res.status(200).send({
         data: orderFilter,
-        meta: { maxRowsByPage: 10, totalRows: orderListNew.length },
+        meta: { maxRowsByPage: 10, totalRows: orderFilter.length },
       });
     } else {
       res.status(200).send(orderListNew);
