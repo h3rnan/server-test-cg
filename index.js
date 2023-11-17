@@ -3,6 +3,11 @@ const cors = require("cors");
 const ws = require("ws");
 const app = express();
 const docs = require("./docs");
+const dayjs = require("dayjs");
+var isSameOrAfter = require("dayjs/plugin/isSameOrAfter");
+var isSameOrBefore = require("dayjs/plugin/isSameOrBefore");
+dayjs.extend(isSameOrAfter);
+dayjs.extend(isSameOrBefore);
 const PORT = process.env.PORT || 3000;
 const HOST = process.env.HOST || "192.168.0.22";
 
@@ -16,21 +21,21 @@ let orderListNew = [
     nOrder: "102122341",
     payStatus: "Pendiente de liberación",
     orderStatus: "Pendiente de despacho",
-    dateOfEnrrollment: "12/11/2023",
+    dateOfEnrrollment: "01/11/2023",
   },
   {
     id: 2,
     nOrder: "102122342",
     payStatus: "Pendiente de pago",
     orderStatus: "Facturado",
-    dateOfEnrrollment: "12/11/2023",
+    dateOfEnrrollment: "01/11/2023",
   },
   {
     id: 3,
     nOrder: "102122343",
     payStatus: "Liberado",
     orderStatus: "En Ruta",
-    dateOfEnrrollment: "12/11/2023",
+    dateOfEnrrollment: "01/11/2023",
   },
   {
     id: 4,
@@ -67,7 +72,6 @@ let orderListNew = [
     orderStatus: "Completado",
     dateOfEnrrollment: "11/11/2023",
   },
-
   {
     id: 9,
     nOrder: "102122349",
@@ -491,16 +495,44 @@ app.get("/order-list", (req, res) => {
     });
     if (req.query?.end_date) {
       const dateslit = req.query?.end_date.split("-");
+      const dateslitStart = req.query?.start_date.split("-");
       const date = new Date(dateslit[2], dateslit[1] - 1, dateslit[0]);
-      console.log("date => ", { date, limint: new Date(2023, 8, 30) });
-      if (date <= new Date(2023, 8, 30)) {
-        res.status(200).send({ data: [] });
-      } else {
-        res.status(200).send({
-          data: orderListNew,
-          meta: { maxRowsByPage: 10, totalRows: orderListNew.length },
+      const dateStart = new Date(
+        dateslitStart[2],
+        dateslitStart[1] - 1,
+        dateslitStart[0]
+      );
+      console.log("date => ", {
+        dateEnd: date,
+        dateStart: dateStart,
+        dateslitEnd: dateslit,
+        dateslitStart,
+      });
+      const orderFilter = orderListNew.filter((dateNew) => {
+        const dateSplitNew = dateNew.dateOfEnrrollment.split("/");
+        const dateFilter = new Date(
+          dateSplitNew[2],
+          dateSplitNew[1] - 1,
+          dateSplitNew[0]
+        );
+        console.log("dateFilter => ", {
+          dateFilter,
+          dateSplitNew,
+          dateOfEnrrollment: dateNew.dateOfEnrrollment,
         });
-      }
+        if (
+          dayjs(dateFilter).isSameOrAfter(dateStart) &&
+          dayjs(dateFilter).isSameOrBefore(date)
+        ) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+      res.status(200).send({
+        data: orderFilter,
+        meta: { maxRowsByPage: 10, totalRows: orderFilter.length },
+      });
     } else {
       res.status(200).send(orderListNew);
     }
@@ -550,6 +582,15 @@ app.get("/product-combination", (req, res) => {
     res.status(200).send(result);
   } catch (err) {
     console.log("product-request ==>", err);
+    res.status(500).send({ message: err.message });
+  }
+});
+
+app.get("/positive-balance", (req, res) => {
+  try {
+    console.log("positive-balance-request ==>", { docs: docs.positiveBalance });
+    res.status(200).send(docs.positiveBalance);
+  } catch (err) {
     res.status(500).send({ message: err.message });
   }
 });
