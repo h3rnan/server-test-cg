@@ -306,6 +306,16 @@ app.get("/order/:id", (req, res) => {
   }
 });
 
+app.delete("/order/:id", (req, res) => {
+  try {
+    const id = req.params?.id;
+    res.status(200).send({ id });
+  } catch (error) {
+    console.log("order-request ==>", error);
+    res.status(500).send("Something went wrong");
+  }
+});
+
 app.post("/order", (req, res) => {
   res.set({
     Connection: "keep-alive",
