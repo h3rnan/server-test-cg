@@ -226,6 +226,20 @@ const docs = {
       value: 10001,
       type: "others",
     },
+    {
+      id: 5,
+      numDocument: 1000000004,
+      dateCreation: "28/09/2023",
+      value: 1000000,
+      type: "oneClick",
+    },
+    {
+      id: 6,
+      numDocument: 1000000005,
+      dateCreation: "28/09/2023",
+      value: 400000,
+      type: "discount",
+    },
   ],
 };
 
