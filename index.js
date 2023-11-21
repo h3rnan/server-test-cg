@@ -27,14 +27,14 @@ let orderListNew = [
     id: 2,
     nOrder: "102122342",
     payStatus: "Pendiente de pago",
-    orderStatus: "Facturado",
+    orderStatus: "En Ruta",
     dateOfEnrrollment: "01/11/2023",
   },
   {
     id: 3,
     nOrder: "102122343",
     payStatus: "Liberado",
-    orderStatus: "En Ruta",
+    orderStatus: "Facturado",
     dateOfEnrrollment: "01/11/2023",
   },
   {
@@ -165,6 +165,7 @@ let orderList = [
     payment: 100000,
     subtotal: 100000,
     total: 100000,
+    haveBonus: true,
     products: [
       {
         id: 0,
@@ -221,6 +222,7 @@ let orderList = [
     payment: 100000,
     subtotal: 100000,
     total: 100000,
+    haveBonus: false,
     products: [
       {
         id: 0,
