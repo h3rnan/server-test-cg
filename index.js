@@ -694,16 +694,25 @@ app.get("/positive-balance", (req, res) => {
 
 app.get("/payment-methods", (req, res) => {
   try {
-    console.log("payment-methods-request ==>", {
-      paymentMethods: docs.paymentMethods,
-    });
-    const refCurrentAccount = req.query?.refCurrentAccount;
+    const refCurrentAccount = req.query?.cod;
     if (refCurrentAccount) {
       const paymentMethod = docs.paymentMethods.find(
-        (method) => method.ref == refMethod
+        (method) => method.cod == refCurrentAccount
+      );
+      const paymentMethodFilter = docs.paymentMethods.filter(
+        (method) => method.method !== 14
       );
       if (paymentMethod) {
-        res.status(200).send(paymentMethod);
+        paymentMethodFilter.push(paymentMethod);
+      }
+      console.log("payment-methods-request ==>", {
+        paymentMethods: docs.paymentMethods,
+        paymentMethod,
+        paymentMethodFilter,
+        refCurrentAccount,
+      });
+      if (paymentMethodFilter) {
+        res.status(200).send(paymentMethodFilter);
       } else {
         res.status(404).send({ message: "No existe el metodo de pago" });
       }

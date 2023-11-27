@@ -265,6 +265,7 @@ const docs = {
     {
       id: 1,
       name: "Cuenta corriente a 3 días",
+      cod: "C127",
       value: 3,
       method: MethodPaymentCreditEnum.currentAccount,
       type: MethodPaymentEnum.credit,
@@ -272,7 +273,7 @@ const docs = {
     {
       id: 2,
       name: "Cuenta corriente a 7 días",
-      ref: "",
+      cod: "C041",
       value: 7,
       method: MethodPaymentCreditEnum.currentAccount,
       type: MethodPaymentEnum.credit,
@@ -280,20 +281,15 @@ const docs = {
     {
       id: 3,
       name: "Cuenta corriente a 10 días",
+      cod: "C042",
       value: 10,
       method: MethodPaymentCreditEnum.currentAccount,
       type: MethodPaymentEnum.credit,
     },
     {
-      id: 4,
-      name: "Cuenta corriente a 1 día",
-      value: 1,
-      method: MethodPaymentCreditEnum.currentAccount,
-      type: MethodPaymentEnum.credit,
-    },
-    {
       id: 5,
-      name: "Cuenta corriente a 2 días",
+      name: "Cuenta corriente a 12 días",
+      cod: "C043",
       value: 2,
       method: MethodPaymentCreditEnum.currentAccount,
       type: MethodPaymentEnum.credit,
@@ -301,6 +297,7 @@ const docs = {
     {
       id: 6,
       name: "Cuenta corriente a 15 días",
+      cod: "C044",
       value: 15,
       method: MethodPaymentCreditEnum.currentAccount,
       type: MethodPaymentEnum.credit,
