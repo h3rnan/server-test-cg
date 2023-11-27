@@ -597,6 +597,169 @@ app.get("/positive-balance", (req, res) => {
   }
 });
 
+app.get("/client-condition", (req, res) => {
+  let conditions = [
+    "C002",
+    "C008",
+    "C016",
+    "C006",
+    "C011",
+    "C017",
+    "C004",
+    "C018",
+    "C003",
+    "C005",
+    "C007",
+    "C009",
+    "C010",
+    "C013",
+    "C014",
+    "C015",
+    "C020",
+    "C019",
+    "C012",
+    "C022",
+    "C021",
+  ];
+  let randomCondition =
+    conditions[Math.floor(Math.random() * conditions.length)];
+
+  res.status(200).send({ clientCondition: randomCondition });
+});
+
+app.get("/hierarchy", (req, res) => {
+  const hierarchies = [
+    {
+      hierarchy: 1,
+      code: "C002",
+      description: "CHEQUE AL DIA",
+      value: 1,
+    },
+    {
+      hierarchy: 2,
+      code: "C008",
+      description: "CON CHEQUE A 7 DIAS",
+      value: 7,
+    },
+    {
+      hierarchy: 3,
+      code: "C016",
+      description: "CON CHEQUE A 15 DIAS",
+      value: 15,
+    },
+    {
+      hierarchy: 4,
+      code: "C006",
+      description: "CON CHEQUE A 5 DIAS",
+      value: 5,
+    },
+    {
+      hierarchy: 5,
+      code: "C011",
+      description: "CON CHEQUE A 10 DIAS",
+      value: 10,
+    },
+    {
+      hierarchy: 6,
+      code: "C017",
+      description: "CON CHEQUE A 16 DIAS",
+      value: 16,
+    },
+    {
+      hierarchy: 7,
+      code: "C004",
+      description: "CON CHEQUE A 3 DIAS",
+      value: 3,
+    },
+    {
+      hierarchy: 8,
+      code: "C018",
+      description: "CON CHEQUE A 17 DIAS",
+      value: 17,
+    },
+    {
+      hierarchy: 9,
+      code: "C003",
+      description: "CON CHEQUE A 2 DIAS",
+      value: 2,
+    },
+    {
+      hierarchy: 10,
+      code: "C005",
+      description: "CON CHEQUE A 4 DIAS",
+      value: 4,
+    },
+
+    {
+      hierarchy: 11,
+      code: "C007",
+      description: "CON CHEQUE A 6 DIAS",
+      value: 6,
+    },
+    {
+      hierarchy: 12,
+      code: "C009",
+      description: "CON CHEQUE A 8 DIAS",
+      value: 8,
+    },
+    {
+      hierarchy: 13,
+      code: "C010",
+      description: "CON CHEQUE A 9 DIAS",
+      value: 9,
+    },
+    {
+      hierarchy: 14,
+      code: "C013",
+      description: "CON CHEQUE A 12 DIAS",
+      value: 12,
+    },
+    {
+      hierarchy: 15,
+      code: "C014",
+      description: "CON CHEQUE A 13 DIAS",
+      value: 13,
+    },
+    {
+      hierarchy: 16,
+      code: "C015",
+      description: "CON CHEQUE A 14 DIAS",
+      value: 14,
+    },
+    {
+      hierarchy: 17,
+      code: "C020",
+      description: "CON CHEQUE A 19 DIAS",
+      value: 19,
+    },
+    {
+      hierarchy: 18,
+      code: "C019",
+      description: "CON CHEQUE A 18 DIAS",
+      value: 18,
+    },
+    {
+      hierarchy: 19,
+      code: "C012",
+      description: "CON CHEQUE A 11 DIAS",
+      value: 11,
+    },
+    {
+      hierarchy: 20,
+      code: "C022",
+      description: "CON CHEQUE A 21 DIAS",
+      value: 21,
+    },
+    {
+      hierarchy: 21,
+      code: "C021",
+      description: "CON CHEQUE A 20 DIAS",
+      value: 20,
+    },
+  ];
+  res.status(200).send(hierarchies);
+});
+
 app.listen(PORT, () => {
   console.log(`Example app listening on port http:${HOST}//${PORT}`);
 });
