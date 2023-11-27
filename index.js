@@ -634,6 +634,17 @@ app.get("/positive-balance", (req, res) => {
   }
 });
 
+app.get("/payment-methods", (req, res) => {
+  try {
+    console.log("payment-methods-request ==>", {
+      paymentMethods: docs.paymentMethods,
+    });
+    res.status(200).send(docs.paymentMethods);
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Example app listening on port http:${HOST}//${PORT}`);
 });

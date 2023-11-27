@@ -1,3 +1,23 @@
+const MethodPaymentEnum = {
+  cash: "cash",
+  credit: "credit",
+  other: "other",
+};
+
+const MethodPaymentCreditEnum = {
+  currentAccount: 14,
+  check: 15,
+};
+
+const MethodPaymentCashEnum = {
+  webpay: 17,
+  bank: 18,
+};
+
+const MethodPaymentOtherEnum = {
+  manual: 16,
+};
+
 const docs = {
   products: [
     {
@@ -239,6 +259,113 @@ const docs = {
       dateCreation: "28/09/2023",
       value: 400000,
       type: "discount",
+    },
+  ],
+  paymentMethods: [
+    {
+      id: 1,
+      name: "Cuenta corriente a 3 días",
+      value: 3,
+      method: MethodPaymentCreditEnum.currentAccount,
+      type: MethodPaymentEnum.credit,
+    },
+    {
+      id: 2,
+      name: "Cuenta corriente a 7 días",
+      value: 7,
+      method: MethodPaymentCreditEnum.currentAccount,
+      type: MethodPaymentEnum.credit,
+    },
+    {
+      id: 3,
+      name: "Cuenta corriente a 10 días",
+      value: 10,
+      method: MethodPaymentCreditEnum.currentAccount,
+      type: MethodPaymentEnum.credit,
+    },
+    {
+      id: 4,
+      name: "Cuenta corriente a 1 día",
+      value: 1,
+      method: MethodPaymentCreditEnum.currentAccount,
+      type: MethodPaymentEnum.credit,
+    },
+    {
+      id: 5,
+      name: "Cuenta corriente a 2 días",
+      value: 2,
+      method: MethodPaymentCreditEnum.currentAccount,
+      type: MethodPaymentEnum.credit,
+    },
+    {
+      id: 6,
+      name: "Cuenta corriente a 15 días",
+      value: 15,
+      method: MethodPaymentCreditEnum.currentAccount,
+      type: MethodPaymentEnum.credit,
+    },
+    {
+      id: 7,
+      name: "Cheque al día",
+      value: 1,
+      method: MethodPaymentCreditEnum.check,
+      type: MethodPaymentEnum.credit,
+    },
+    {
+      id: 8,
+      name: "Cheque a 3 días",
+      value: 3,
+      method: MethodPaymentCreditEnum.check,
+      type: MethodPaymentEnum.credit,
+    },
+    {
+      id: 9,
+      name: "Cheque a 10 días",
+      value: 10,
+      method: MethodPaymentCreditEnum.check,
+      type: MethodPaymentEnum.credit,
+    },
+    {
+      id: 10,
+      name: "Cheque a 15 díaa",
+      value: 15,
+      method: MethodPaymentCreditEnum.check,
+      type: MethodPaymentEnum.credit,
+    },
+    {
+      id: 11,
+      name: "Santander",
+      value: "Santander",
+      method: MethodPaymentCashEnum.bank,
+      type: MethodPaymentEnum.cash,
+    },
+    {
+      id: 12,
+      name: "Banco de Chile",
+      value: "Banco de Chile",
+      method: MethodPaymentCashEnum.bank,
+      type: MethodPaymentEnum.cash,
+    },
+    {
+      id: 13,
+      name: "Banco Estado",
+      value: "Banco Estado",
+      method: MethodPaymentCashEnum.bank,
+      type: MethodPaymentEnum.cash,
+    },
+    {
+      id: MethodPaymentCashEnum.webpay,
+      name: "WebPay",
+      value: "WebPay",
+      type: MethodPaymentEnum.cash,
+      method: MethodPaymentCashEnum.webpay,
+    },
+    {
+      id: MethodPaymentOtherEnum.manual,
+      name: "Transferencia manual",
+      value: "Transferencia manual",
+      type: MethodPaymentEnum.other,
+      method: MethodPaymentOtherEnum.manual,
     },
   ],
 };
