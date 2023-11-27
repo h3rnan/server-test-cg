@@ -200,6 +200,7 @@ let orderList = [
     paymentStatus: "Pendiente",
     balance: 100000,
     payment: 100000,
+    bonus: 10000,
     subtotal: 100000,
     total: 100000,
     haveBonus: true,
@@ -255,6 +256,63 @@ let orderList = [
     paymentMethod: "Efectivo",
     orderStatus: "Pendiente",
     paymentStatus: "Pendiente",
+    balance: 100000,
+    payment: 100000,
+    subtotal: 100000,
+    total: 100000,
+    haveBonus: false,
+    products: [
+      {
+        id: 0,
+        name: "Cilindro 5kg",
+        weight: 5,
+        price: 8268,
+        amount: 10,
+        totalWeight: 50,
+        vouchers: 2,
+        failed: 1,
+        totalValue: 10000,
+      },
+      {
+        id: 2,
+        name: "Cilindro 15kg",
+        price: 19964,
+        amount: 10,
+        weight: 10,
+        totalWeight: 150,
+        vouchers: 2,
+        failed: 1,
+        totalValue: 30000,
+      },
+      {
+        id: 3,
+        name: "Cilindro 45kg",
+        price: 1200,
+        amount: 10,
+        weight: 45,
+        totalWeight: 450,
+        vouchers: 2,
+        failed: 1,
+        totalValue: 70000,
+      },
+    ],
+  },
+  {
+    id: 4,
+    orderNumber: 102122344,
+    sapDistributor: 123456788,
+    atCreatedDate: "19/04/2023",
+    atCreatedTime: "19:00",
+    distributorName: "San Juanito",
+    typeOfLoad: "Carga a piso",
+    deliveryMethod: "Retiro",
+    retirementDate: "Mañana (17/07/2024)",
+    centerOfDistribution: "Tarde - 15:00 a 18:00hrs.",
+    deliveryWarehouse: "Av. El Salto 7654, Recoleta",
+    documentType: "Factura",
+    paymentMethod: "Efectivo",
+    orderStatus: "Completado",
+    paymentStatus: "Pagado",
     balance: 100000,
     payment: 100000,
     subtotal: 100000,
@@ -639,6 +697,9 @@ app.get("/payment-methods", (req, res) => {
     console.log("payment-methods-request ==>", {
       paymentMethods: docs.paymentMethods,
     });
+    const idProducts = req.query?.combinations
+      .split(",")
+      .map((id) => Number(id));
     res.status(200).send(docs.paymentMethods);
   } catch (err) {
     res.status(500).send({ message: err.message });
@@ -646,5 +707,5 @@ app.get("/payment-methods", (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Example app listening on port http:${HOST}//${PORT}`);
+  console.log(`Example app listening on port http://${HOST}:${PORT}`);
 });
