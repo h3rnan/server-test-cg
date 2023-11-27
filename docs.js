@@ -272,6 +272,7 @@ const docs = {
     {
       id: 2,
       name: "Cuenta corriente a 7 días",
+      ref: "",
       value: 7,
       method: MethodPaymentCreditEnum.currentAccount,
       type: MethodPaymentEnum.credit,

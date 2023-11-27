@@ -697,10 +697,19 @@ app.get("/payment-methods", (req, res) => {
     console.log("payment-methods-request ==>", {
       paymentMethods: docs.paymentMethods,
     });
-    const idProducts = req.query?.combinations
-      .split(",")
-      .map((id) => Number(id));
-    res.status(200).send(docs.paymentMethods);
+    const refCurrentAccount = req.query?.refCurrentAccount;
+    if (refCurrentAccount) {
+      const paymentMethod = docs.paymentMethods.find(
+        (method) => method.ref == refMethod
+      );
+      if (paymentMethod) {
+        res.status(200).send(paymentMethod);
+      } else {
+        res.status(404).send({ message: "No existe el metodo de pago" });
+      }
+    } else {
+      res.status(200).send(docs.paymentMethods);
+    }
   } catch (err) {
     res.status(500).send({ message: err.message });
   }
