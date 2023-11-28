@@ -634,6 +634,31 @@ app.get("/positive-balance", (req, res) => {
   }
 });
 
+app.get("/client-condition", (req, res) => {
+  let conditions = [
+    "C002",
+    "C008",
+    "C016",
+    "C006",
+    "C011",
+    "C017",
+    "C004",
+    "C003",
+    "C005",
+    "C007",
+    "C009",
+    "C010",
+    "C013",
+    "C014",
+    "C015",
+    "C012",
+  ];
+  let randomCondition =
+    conditions[Math.floor(Math.random() * conditions.length)];
+
+  res.status(200).send({ clientCondition: randomCondition });
+});
+
 app.get("/payment-methods", (req, res) => {
   try {
     console.log("payment-methods-request ==>", {
