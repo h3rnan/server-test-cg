@@ -428,15 +428,6 @@ const docs = {
       method: MethodPaymentCreditEnum.check,
       type: MethodPaymentEnum.credit,
     },
-    {
-      id: 30,
-      hierarchy: 11,
-      cod: "C007",
-      labelSummary: "Con cheque a 6 dias",
-      value: 6,
-      method: MethodPaymentCreditEnum.check,
-      type: MethodPaymentEnum.credit,
-    },
 
     {
       id: 30,
