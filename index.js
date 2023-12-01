@@ -695,7 +695,7 @@ app.get("/positive-balance", (req, res) => {
 app.get("/client-condition", (req, res) => {
   let conditions = [
     "C002",
-    "C008",
+    /*  "C008",
     "C016",
     "C006",
     "C011",
@@ -709,7 +709,7 @@ app.get("/client-condition", (req, res) => {
     "C013",
     "C014",
     "C015",
-    "C012",
+    "C012", */
   ];
   let randomCondition =
     conditions[Math.floor(Math.random() * conditions.length)];
